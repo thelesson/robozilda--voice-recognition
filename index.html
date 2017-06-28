@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/artyom.js"></script>
+<!--script hand on -->
+
+<link href="lib/holdOn/HoldOn.min.css" rel="stylesheet">
+ <script src="lib/holdOn/HoldOn.min.js"></script>
+  <script src="js/comandosSite.js"></script>
+   <script src="js/funcaoFacebook.js"></script>
+ <script src="js/funcoes.js"></script>
+ <script src="js/frases.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link href="css/estilo.css" rel="stylesheet">
+<meta charset="utf-8">
+	<title>Projeto Reconhecimento de Voz</title>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 'SUA_ID_DO_FACEBOOK_AQUI',
+      xfbml      : true,
+      version    : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+function myFacebookLogin() 
+{
+    FB.login(function(facebookText){
+  // Note: The call will only work if you accept the permission request
+  FB.api('/me/feed', 'post', {message: facebookText});
+}, {scope: 'publish_actions'});
+}
+</script>       
+<header>
+<div class="jumbotron">
+	<h1 id="cor-texto-h1" class="texto-h1">Programa de Reconhecimento de Voz</h1>
+</div>
+</header>
+<section>
+	<div class="container">
+		<div class="row" >
+			<div class="col-sm-12" id="texto-p">
+				<p id="cor-texto">Este site utiliza comandos de voz. Diga o comando desejado e desfrute da facilidade dos nossos serviços!</p>
+				<p id="cor-texto2">É necessário ter um microfone</p>
+                <p style="color:yellow">ESTAMOS TRABALHANDO PARA REDUZIR O TEMPO DE RESPOSTA</p>
+                <p style="color:#ff5400">TEMPO MÉDIO DE RESPOSTA É DE 12.3 SEGUNDOS</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="caixa" id="caixa">
+			
+				<input  class="form-control" type="text" id="capturando" name="texto" id="texto">
+			
+			</div>
+		</div>
+        <div class="row">
+            <div class="classe=teste" id="conteudo"></div>
+        </div>
+		<div class="botao-linha">
+        <hr>
+        <div style="    background-color: rgb(181, 178, 178);
+    color: black;">
+            <h3>Modo Básico</h3>
+            </div>
+        <hr>
+		<table class="table">
+  <thead class="table table-striped">
+    <tr class="active" style="color:black">
+      <th style="width:10%">#</th>
+      <th style="width:30%">Voz de Comando</th>
+      <th style="width:30%">Exemplo prático</th>
+      <th style="width:30%">Descição do Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>background *</td>
+      <td>background laranja</td>
+      <td>Altera o fundo site</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>ir para *,visitar *,site da *,visite o site *,site *,site do *</td>
+      <td>ir para facebook</td>
+      <td>@Redireciona o usuário para o site desejado</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>fechar *</td>
+      <td>fechar facebook</td>
+      <td>Fecha janela facebook no navegador do usuário<br>(* note que a Robozilda consegue fechar apenas a janela que foi arbeta porela)</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Robozilda diga a hora","Robozilda que horas são?"</td>
+      <td>Robozilda dia a hora</td>
+      <td>Retorna o horário atual</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Robozilda que dia é hoje?</td>
+      <td>Robozilda que dia é hoje?</td>
+      <td>Retorna o dia da semana atual</td>
+    </tr>
+  </tbody>
+</table>
+
+
+		</div>	
+        <div class="botao-linha">
+        <hr>
+        <div style="    background-color: rgb(181, 178, 178);
+    color: black;">
+            <h3>Modo Calculadora</h3>
+            </div>
+        <hr>
+        <table class="table">
+  <thead class="table table-striped">
+    <tr class="active" style="color:black">
+      <th style="width:10%">#</th>
+      <th style="width:30%">Voz de Comando</th>
+      <th style="width:30%">Exemplo prático</th>
+      <th style="width:30%">Descição do Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>calcule a soma de * mais *</td>
+      <td>calcule a soma de 15 mais 10</td>
+      <td>Realiza a operação básica de adição</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>diminua * menos *,calcule a subtração de * menos *</td>
+      <td>diminua 10 menos 5</td>
+      <td>Realiza a operação básica de subtração</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>multiplique * vezes *,calcule a multiplicação de * vezes *</td>
+      <td>multiplique 5 vezes 3</td>
+      <td>Operação básica de multiplicação</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>divida * por *, calcule a divisão de * por *</td>
+      <td>divida 10 por 2</td>
+      <td>Operação básica de divisão</td>
+    </tr>
+    
+  </tbody>
+</table></div>
+<div class="botao-linha">
+        <hr>
+        <div style="    background-color: rgb(181, 178, 178);
+    color: black;">
+            <h3>Modo Google</h3>
+            </div>
+        <hr>
+        <table class="table">
+  <thead class="table table-striped">
+    <tr class="active" style="color:black">
+      <th style="width:10%">#</th>
+      <th style="width:30%">Voz de Comando</th>
+      <th style="width:30%">Exemplo prático</th>
+      <th style="width:30%">Descição do Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>"pesquise por *","pesquisa por *","procure por *","pesquisa sobre *","pesquise sobre *","pesquiise *","pesquisa *"</td>
+      <td>pesquise por carro</td>
+      <td>Retorna uma pesquisa sobre carros no google</td>
+    </tr>
+  </tbody>
+</table></div>
+<div class="botao-linha">
+        <hr>
+        <div style="    background-color: rgb(181, 178, 178);
+    color: black;">
+            <h3>Modo Facebook</h3>
+            </div>
+        <hr>
+        <table class="table">
+  <thead class="table table-striped">
+    <tr class="active" style="color:black">
+      <th style="width:10%">#</th>
+      <th style="width:30%">Voz de Comando</th>
+      <th style="width:30%">Exemplo prático</th>
+      <th style="width:30%">Descição do Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>figura pública no facebook *</td>
+      <td>figura pública no facebook Ayrton Senna</td>
+      <td>Realiza uma busca somente por pessoa publicas no Facebook</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>encontre * no facebook</td>
+      <td>encontre Thélesson no facebook</td>
+      <td>Pesquisa de forma genérica no facebook(nomes,lugares,páginas,etc)</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>últimas histórias sobre * no facebook</td>
+      <td>úiltimas hist´rias sobre programação no facebook</td>
+      <td>Retorna a lista das ultimas publicações relacionada ao termo pesquisado</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>últimas histórias sobre * no facebook</td>
+      <td>úiltimas histórias sobre programação no facebook</td>
+      <td>Retorna a lista das ultimas publicações relacionada ao termo pesquisado</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>todas as histórias sobre * no facebook</td>
+      <td>todas as histórias sobre programação no facebook</td>
+      <td>Retorna a lista das todas publicações relacionada ao termo pesquisado</td>
+    </tr>
+     <tr>
+      <th scope="row">5</th>
+      <td>todas as histórias sobre * no facebook</td>
+      <td>todas as histórias sobre programação no facebook</td>
+      <td>Retorna a lista das todas publicações relacionada ao termo pesquisado</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>encontre no facebook todos que moram em * e visitaram *</td>
+      <td>encontre no facebook todos que moram em Saquarema e visitaram Paris</td>
+      <td>Retorna a lis de todas as pessoas que moram em determinado local e fizeram check-in em um lugar especifico</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>locais que estive no facebook</td>
+      <td>locais que estive no facebook</td>
+      <td>Retorna a lista de locais que o usuário fez check-in</td>
+    </tr>
+  </tbody>
+</table></div>
+	</div>
+</section>
+<!-- <script type="text/javascript">
+	window.addEventListener('DOMCOntentLoaded',function(e){
+
+		var speakBtn= document.querySelector('#speakBtn');
+
+		if(window.SpeechRecognition || window.webkitSpeechRecognition){
+
+			var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+			var recognition = new SpeechRecognition();
+
+			speakBtn.addEventListener('click',function(e){
+
+
+				recognition.start();
+			},false);
+
+			recognition.addEventListener('result',function(e){
+				console.log(e);
+			},false);
+
+		} else{
+			alert('O reconhecimento de voz não está implementado em seu navegador!');
+		}
+
+	},false);
+</script> -->
+<script type="text/javascript">
+    
+</script>
+ <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            var speakBtn = document.querySelector('#speakBtn');
+             var acessarSiteb = document.querySelector('#acessarSite');
+              var pesquisab = document.querySelector('#pesquisa');
+            // testa se o navegador suporta o reconhecimento de voz
+           
+        window.onload = function(){
+   var inicio= artyom.initialize({
+        lang:"pt-PT",
+        debug:true,
+        speed:1.25,
+        continuous:true,
+        listen:true,
+        mode:"normal",
+        volume:100
+       // soudex:true
+        
+    }).then(function(){
+
+         var options2 = {
+     theme:"sk-cube-grid",
+     message:'Processando sua informação...',
+     backgroundColor:"rgba(25, 29, 29, 0.46);",
+     textColor:"white"
+};
+ var options3 = {
+     theme:"sk-folding-cube",
+     message:'Comando não localizado</br>Por favor, repita novamente a instrução!',
+     backgroundColor:"red",
+     textColor:"white"
+};
+        console.log("Iniciou");
+     //funcao de erro   
+        artyom.when("ERROR",function(error){
+
+    if(error.code == "network"){
+        artyom.say("Opa, parece que existe algum erro com a conexão! Esse site necessita de uma conexão com a internet para funcionar!");
+    }
+
+    if(error.code == "audio-capture"){
+         artyom.say("Um erro ocorreu! É não posso te ouvir sem um microfone habilitado em sua maquina, por favor habilite o microfone para me passar instruções!");
+        alert("An error ocurred, artyom cannot work without a microphone");
+    }
+
+    if(error.code == "not-allowed"){
+         artyom.say("Opa, parece que seu microfone está bloqueado, por favor, permita o acesso para que eu possa ouvir seus comandos!");
+        alert("An error ocurred, it seems the access to your microphone is denied");
+    }
+
+    console.log(error.message);
+});
+//fim erro 
+//inicio funcao handler
+var onCommandMatched = "COMMAND_MATCHED";
+artyom.when(onCommandMatched,function(){
+   console.log("comando encontrado");
+    HoldOn.open(options2);
+});
+var NotonCommandMatched = "NOT_COMMAND_MATCHED";
+artyom.when(NotonCommandMatched,function(){
+   console.log("comando não encontrado");
+   artyom.say("Me desculpe, mas não consegui entender seu comando. Por favor repida pausadamente o que deseja");
+    HoldOn.open(options3);
+    setTimeout(() => {
+    // Enable command recognition again
+  
+     HoldOn.close(options3);
+    // Try to say hello again and now the command will be recognized
+}, 5000);
+
+});
+
+// Some events receives an object
+artyom.when("COMMAND_RECOGNITION_END",function(status){
+   HoldOn.close(options2);
+     console.log("comando processado");
+   
+});
+//fim funcao handler
+ zdata = new Date();
+zhoras = zdata.getHours();
+zminutos = zdata.getMinutes();
+HoldOn.open(options);
+if(zhoras>21 && zhoras<24){artyom.say("Boa noite");}
+console.log(zdata);
+       // artyom.say("São"+zhoras+" horas e "+zminutos+"minutos!");
+      //  artyom.sayRandom(saudacaoInicial);
+
+/**
+ * Speak a short string and indicate its callbacks in the console.
+ */
+
+
+ 
+/**
+ * Say something
+ */
+artyom.sayRandom(saudacaoInicial);
+   setTimeout(() => {
+    // Enable command recognition again
+     HoldOn.close(options);
+    // Try to say hello again and now the command will be recognized
+}, 5000);
+
+ // artyom.addCommands(falainicial);      
+
+       
+//aqui estava a funcao funcSaudacaoNome  
+artyom.addCommands(funModoInicial);
+artyom.addCommands(funcSite);
+artyom.addCommands(funcBackground);
+artyom.addCommands(funcPesquisa);
+artyom.addCommands(funcTime);
+artyom.addCommands(funCalc);
+artyom.addCommands(funFace);
+artyom.addCommands(funcCancelar);
+
+
+//artyom.newPrompt(funcTutorial);
+
+
+
+       // artyom.sayRandom(["Antes de começar diga seu nome para te conhecer melhor!","Hoje não estou de bom humor...então diz logo  que deseja!","Diz seu nome ai, véi","Fala mano, qual seu nome mesmo? Me esqueci k kk k hahahahaaaaa"]);
+
+        
+      
+           /* artyom.on(['ir para *'] , true).then(function(i,site){
+    artyom.say("Ok. Entendi. Vou redirecionar você para o site desejado. Indo para o site "+site+".com");
+                        window.location.href = 'http://' +site+'.com','_blank';
+                     //  window.open("www"+site+".com","_blank");
+});*/
+   
+            
+           // artyom.addCommands(funcSaudacao);
+            artyom.redirectRecognizedTextOutput(function(text,final){
+                var captura = document.getElementById("capturando");
+                if(final){
+                    document.getElementById("capturando").value = text;
+                }
+                else{
+                    document.getElementById("capturando").value = "..";
+                }
+            });
+            
+        console.log("Pegando os dados" , artyom.getVoices());
+    }).catch(function(){
+        console.error("Deu Erro");
+    });
+};
+
+            
+            if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+                // captura a voz
+                var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+                var acessarSite = new SpeechRecognition();
+                var pesquisa = new SpeechRecognition();
+                // inicia reconhecimento
+               
+                // resultado do reconhecimento
+                recognition.addEventListener('result', function(e) {
+                	// recognition.continuous = true;
+                	/*recognition.interimResults = true;*/
+                    console.log(e);
+                    var result = e.results[0][0].transcript;
+                    console.log(result);
+                    /*document.querySelector("[name='txtstart']").value = result;*/
+                    if (result.toLowerCase() === 'original') {
+                    	document.body.classList.remove("luz-laranja");
+                        document.body.classList.remove('luz-apagada');
+
+                    }
+                    if (result.toLowerCase() === 'branco') {
+                    	document.body.classList.remove("luz-azul");
+                    	document.body.classList.remove("luz-laranja");
+                        document.body.classList.add('luz-apagada');
+
+                    }
+                     if (result.toLowerCase() === 'laranja') {
+                     	document.body.classList.remove("luz-apagada");
+                     	document.body.classList.remove("luz-azul");
+                        document.body.classList.add('luz-laranja');
+
+                    }
+                    if (result.toLowerCase() === 'azul') {
+                     	document.body.classList.remove("luz-apagada");
+                        document.body.classList.remove('luz-laranja');
+                        document.body.classList.add('luz-azul');
+
+                    }
+                     if (result.toLowerCase() === 'sasaazul') {
+                     	document.body.classList.remove("texto-h1-verde");
+                     	$( "h1.texto-h1" ).toggleClass( "texto-h1-azul" );
+                     	document.getElementById('cor-texto').className = 'cor-texto-azul';
+                     	document.getElementById('cor-texto2').className = 'cor-texto-azul';
+
+                    }
+                    if (result.toLowerCase() === 'sasaverde') {
+                    	document.body.classList.remove("texto-h1-azul");
+                     	$( "h1.texto-h1" ).toggleClass( "texto-h1-verde" );
+                     	
+
+                    }
+
+
+                    
+                }, false);
+                acessarSite.addEventListener('result', function(e) {
+                	/*recognition.continuous = true;*/
+                	/*recognition.interimResults = true;*/
+                    console.log(e);
+                    var result = e.results[0][0].transcript;
+                    console.log(result);
+                    window.location.href = 'http://' + result;
+                     }, false);
+                
+
+            } else {
+                alert('Este navegador não suporta esta funcionalidade ainda!');
+            }
+        }, false);
+    </script>
+
+</body>
+</html>

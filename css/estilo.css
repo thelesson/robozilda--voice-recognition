@@ -1,0 +1,54 @@
+body{
+		font-size: 40px;
+		background-color: black;
+		color:white;
+	}
+	header{
+	text-align: center;
+
+}
+table{
+	font-size:20px;
+}
+.jumbotron h1{
+	color:black;
+}
+.luz-apagada{
+	color:black;
+	background-color: white;
+}
+.luz-laranja{
+	color:white;
+	background-color: orange;
+}
+.luz-azul{
+	color:white;
+	background-color: blue;
+}
+
+.cor-texto-azul{color:blue;}
+.texto-h1-azul{color:blue!important;}
+.texto-h1-verde{color:green!important;}
+.botao-linha{
+	width: 100%;
+	margin:0 auto;
+}
+.botao-linha h3{
+	text-align: center;
+}
+#speakBtn{
+	width: 25%;
+	margin-right: 10px;
+}
+#acessarSite{
+	width:25%;
+	margin-right: 10px;
+}
+#pesquisa{
+	width: 25%;
+	margin-left: 10px;
+}
+#texto-p{
+	font-size: 25px !important;
+	text-align: center!important;
+}
